@@ -2,7 +2,6 @@
 import { useState, useEffect } from "preact/hooks";
 import { Toast } from "../components/Toast.tsx"; // correct path
 import { FeedbackPrompt } from "../components/FeedbackPrompt.tsx"; // correct path
-import { Button } from "../components/Button.tsx";
 
 export default function SendEmail() {
   const [file, setFile] = useState<File | null>(null);
@@ -29,6 +28,7 @@ export default function SendEmail() {
   }, 10000);
   return () => clearTimeout(timer);
 }, []);
+
 
   useEffect(() => {
     if (
@@ -321,3 +321,4 @@ export default function SendEmail() {
     </div>
   );
 }
+

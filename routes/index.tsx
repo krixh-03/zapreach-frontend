@@ -29,7 +29,7 @@ export default function Home() {
       <div class="flex flex-col min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white">
 
         {/* Header Component goes here */}
-        <Header />
+        <Header  />
 
         {/* Desktop button: fixed bottom-left, visible only on md+ screens */}
         <a
@@ -62,7 +62,7 @@ export default function Home() {
 
           {/* Right Form */}
           <section class="bg-gray-800 p-6 rounded-xl shadow-xl border border-gray-700">
-            <SendEmail />
+            <SendEmail/>
           </section>
         </main>
       </div>
