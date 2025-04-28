@@ -9,6 +9,7 @@ export default function Home() {
         {/* Keep only metadata here */}
         <title>Zapreach - Cold Email Automation</title>
         {/* Add other meta tags, links to stylesheets etc. */}
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7bf525b54e064cfa839eff609a899251"}'></script>
       </Head>
 
       <div class="flex flex-col min-h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white">
