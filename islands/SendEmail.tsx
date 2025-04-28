@@ -2,6 +2,7 @@
 import { useState, useEffect } from "preact/hooks";
 import { Toast } from "../components/Toast.tsx"; // correct path
 import { FeedbackPrompt } from "../components/FeedbackPrompt.tsx"; // correct path
+import { Button } from "../components/Button.tsx";
 
 export default function SendEmail() {
   const [file, setFile] = useState<File | null>(null);
@@ -18,6 +19,16 @@ export default function SendEmail() {
   const [showPrompt, setShowPrompt] = useState(false);
   const [testEmail, setTestEmail] = useState("");
   const [isTestLoading, setIsTestLoading] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
+  useEffect(() => {
+  if (sessionStorage.getItem("feedbackModalShown")) return;
+  const timer = setTimeout(() => {
+    setShowFeedbackModal(true);
+    sessionStorage.setItem("feedbackModalShown", "true");
+  }, 10000);
+  return () => clearTimeout(timer);
+}, []);
 
   useEffect(() => {
     if (
@@ -276,6 +287,29 @@ export default function SendEmail() {
         {isTestLoading ? "Sending..." : "✉️ Send test email to myself"}
       </button>
 </div>
+
+        {showFeedbackModal && (
+  <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
+    <div class="bg-white rounded-xl p-6 shadow-xl max-w-sm w-full text-center">
+      <h2 class="text-lg font-bold mb-2 text-black">Got a minute?</h2>
+      <p class="mb-4 text-black">We'd love your feedback to make Zapreach better!</p>
+      <button
+        type="button"
+        class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold py-2 px-4 rounded-xl mr-2"
+        onClick={() => window.location.href = "/feedback"}
+      >
+        Give Feedback
+      </button>
+      <button
+        type="button"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-xl"
+        onClick={() => setShowFeedbackModal(false)}
+      >
+        Maybe Later
+      </button>
+    </div>
+  </div>
+)}
 
       <Toast message={toastMessage} type={toastType} visible={toastVisible} />
 

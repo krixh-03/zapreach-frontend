@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import SendEmail from "../islands/SendEmail.tsx";
 import Header from "../islands/Header.tsx"; // Import the Header island
 
-export default function Home() {
+export default function Home() { 
   return (
     <>
       <Head>
