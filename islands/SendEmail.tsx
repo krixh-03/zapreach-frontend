@@ -16,6 +16,8 @@ export default function SendEmail() {
   >("success");
   const [isLoading, setIsLoading] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [testEmail, setTestEmail] = useState("");
+  const [isTestLoading, setIsTestLoading] = useState(false);
 
   useEffect(() => {
     if (
@@ -126,6 +128,58 @@ export default function SendEmail() {
     setShowPrompt(false);
   };
 
+  const sendTestEmail = async () => {
+  if (!testEmail) {
+    setToastMessage("Please enter your email address.");
+    setToastType("error");
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 3000);
+    return;
+  }
+  if (!subjectTemplate || !template) {
+    setToastMessage("Please fill in the subject and email template.");
+    setToastType("error");
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 3000);
+    return;
+  }
+  setIsTestLoading(true);
+  setToastMessage("Sending test email...");
+  setToastType("loading");
+  setToastVisible(true);
+
+  try {
+    const res = await fetch("http://api.zapreach.icu/send-test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: testEmail,
+        subject: subjectTemplate.replace(/{{\s*name\s*}}/gi, "Test User"),
+        body: template.replace(/{{\s*name\s*}}/gi, "Test User"),
+      }),
+    });
+    const textResponse = await res.text();
+    if (res.ok) {
+      setToastMessage("Test email sent! Check your inbox.");
+      setToastType("success");
+      setToastVisible(true);
+    } else {
+      setToastMessage(
+        `Error: ${textResponse || "Unknown error"} (Status: ${res.status})`
+      );
+      setToastType("error");
+      setToastVisible(true);
+    }
+  } catch (error: any) {
+    setToastMessage(`Error: ${error.message}`);
+    setToastType("error");
+    setToastVisible(true);
+  }
+  setIsTestLoading(false);
+  setTimeout(() => setToastVisible(false), 3000);
+};
+
+
   return (
     <div class="w-full max-w-2xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 p-6 rounded-2xl shadow-xl border border-yellow-300">
       <label class="block text-sm font-semibold text-gray-200 mb-1">
@@ -202,6 +256,26 @@ export default function SendEmail() {
           ""
         )}
       </button>
+      <div class="my-6 p-4 bg-gray-800 rounded-xl border border-gray-700">
+      <label class="block text-sm font-semibold text-gray-200 mb-1">
+        Or, send a test email to yourself:
+      </label>
+      <input
+        type="email"
+        class="block w-full bg-gray-700 text-white border border-gray-700 rounded-md shadow-sm p-3 mb-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        placeholder="your@email.com"
+        value={testEmail}
+        onInput={(e) => setTestEmail(e.currentTarget.value)}
+      />
+      <button
+        type="button"
+        class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-xl transition duration-200 shadow"
+        onClick={sendTestEmail}
+        disabled={isTestLoading}
+      >
+        {isTestLoading ? "Sending..." : "✉️ Send test email to myself"}
+      </button>
+</div>
 
       <Toast message={toastMessage} type={toastType} visible={toastVisible} />
 
