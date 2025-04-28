@@ -6,9 +6,23 @@ export default function Home() {
   return (
     <>
       <Head>
-        {/* Keep only metadata here */}
-        <title>Zapreach - Cold Email Automation</title>
-        {/* Add other meta tags, links to stylesheets etc. */}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Zapreach helps you reach more leads faster. Clean, simple, and powerful cold outreach tool to grow your business." />
+        <title>Zapreach - Supercharge Your Cold Outreach</title>
+
+        <meta property="og:title" content="Zapreach - Supercharge Your Cold Outreach" />
+        <meta property="og:description" content="Zapreach helps you reach more leads faster. Clean, simple, and powerful cold outreach tool to grow your business." />
+        <meta property="og:image" content="https://zapreach.icu/og.png" />
+        <meta property="og:url" content="https://zapreach.icu/" />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Zapreach - Supercharge Your Cold Outreach" />
+        <meta name="twitter:description" content="Zapreach helps you reach more leads faster. Clean, simple, and powerful cold outreach tool to grow your business." />
+        <meta name="twitter:image" content="https://zapreach.icu/og.png" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="favicon (1).ico" />
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7bf525b54e064cfa839eff609a899251"}'></script>
       </Head>
 
