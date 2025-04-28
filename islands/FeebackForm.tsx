@@ -12,7 +12,7 @@ export default function FeedbackForm() {
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
 
   async function fetchFeedbacks() {
-    const res = await fetch('http://localhost:8787/feedback');
+    const res = await fetch('https://api.zapreach.icu/feedback');
     const data = await res.json();
     if (data.success) {
       setFeedbacks(data.feedbacks);
@@ -38,7 +38,7 @@ export default function FeedbackForm() {
       JSON.stringify([...upvoted, feedback.feedback])
     );
 
-    await fetch('http://localhost:8787/feedback/upvote', {
+    await fetch('https://api.zapreach.icu/feedback/upvote', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ feedback: feedback.feedback }),
@@ -50,7 +50,7 @@ export default function FeedbackForm() {
     if (!text.trim()) return;
 
     setLoading(true);
-    const res = await fetch('http://localhost:8787/feedback', {
+    const res = await fetch('https://api.zapreach.icu/feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ feedback: text }),

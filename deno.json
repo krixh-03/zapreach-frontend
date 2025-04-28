@@ -22,6 +22,7 @@
   ],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "@alloc/quick-lru": "npm:@alloc/quick-lru@^5.2.0",
     "daisyui": "npm:daisyui@^5.0.28",
     "preact": "https://esm.sh/preact@10.22.0",
     "preact/": "https://esm.sh/preact@10.22.0/",

@@ -70,7 +70,7 @@ export default function SendEmail() {
       formData.append("template", template);
       formData.append("subject", subjectTemplate);
 
-      const res = await fetch("http://localhost:8787/send", {
+      const res = await fetch("https://api.zapreach.icu/send", {
         method: "POST",
         body: formData,
       });
