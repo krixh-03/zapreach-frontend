@@ -149,7 +149,7 @@ export default function SendEmail() {
   setToastVisible(true);
 
   try {
-    const res = await fetch("http://api.zapreach.icu/send-test", {
+    const res = await fetch("https://api.zapreach.icu/send-test", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
